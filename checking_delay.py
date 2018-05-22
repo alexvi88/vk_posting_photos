@@ -29,8 +29,11 @@ def delay_of_first_post():
         if last_postponed_time != 0:
             now_temp_d = datetime.datetime.now()
             now_date = now_temp_d.timestamp()
-            delay += int(last_postponed_time - now_date) + settings.posts_interval
-
+            delay += int(last_postponed_time - now_date)
+            
+            if not need_first_post_delay:
+                delay += settings.posts_interval
+                
     if need_first_post_delay:
         delay += int(args.time)*3600
 
